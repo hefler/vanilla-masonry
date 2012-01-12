@@ -201,6 +201,7 @@
   Masonry.defaults = {
     isResizable: true,
     gutterWidth: 0,
+    containerMaxWidth: Infinty,
     isRTL: false,
     isFitWidth: false
   };
@@ -269,8 +270,9 @@
     // calculates number of columns
     // i.e. this.columnWidth = 200
     _getColumns: function() {
-      var container = this.options.isFitWidth ? this.element.parentNode : this.element,
-          containerWidth = getWH( container, 'width' );
+      var container = this.options.isFitWidth ? this.element.parentNode : this.element;
+      var fullContainerWidth = getWH( container, 'width' );
+      var containerWidth = ((fullContainerWidth <= this.options.containerMaxWidth) ? fullContainerWidth : this.options.containerMaxWidth);
 
                          // use fluid columnWidth function if there
       this.columnWidth = this.isFluid ? this.options.columnWidth( containerWidth ) :
